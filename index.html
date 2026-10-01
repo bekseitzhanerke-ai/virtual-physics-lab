@@ -3,10 +3,225 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Виртуалды физика зертханасы</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #172033;
+    }
+
+    header {
+      background: linear-gradient(135deg, #14213d, #2563eb);
+      color: white;
+      padding: 70px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 42px;
+      margin-bottom: 15px;
+    }
+
+    header p {
+      font-size: 19px;
+      opacity: 0.9;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 50px auto;
+      padding: 0 20px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 30px;
+      margin-bottom: 30px;
+    }
+
+    .labs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .lab-card {
+      background: white;
+      border-radius: 18px;
+      padding: 25px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+      transition: 0.3s;
+    }
+
+    .lab-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .lab-number {
+      color: #2563eb;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .lab-card h3 {
+      font-size: 21px;
+      margin-bottom: 12px;
+    }
+
+    .lab-card p {
+      color: #667085;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    button {
+      border: none;
+      background: #2563eb;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .info {
+      margin-top: 50px;
+      background: white;
+      padding: 30px;
+      border-radius: 18px;
+      line-height: 1.7;
+    }
+
+    footer {
+      margin-top: 60px;
+      padding: 25px;
+      background: #14213d;
+      color: white;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 30px;
+      }
+
+      header {
+        padding: 50px 15px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Виртуалды физика зертханасы</h1>
-  <p>Электр және магнетизм зертханалық жұмыстары</p>
+
+  <header>
+    <h1>Виртуалды физика зертханасы</h1>
+    <p>Электр және магнетизм бойынша зертханалық жұмыстар</p>
+  </header>
+
+  <main class="container">
+
+    <h2 class="section-title">Зертханалық жұмыстар</h2>
+
+    <div class="labs">
+
+      <div class="lab-card">
+        <div class="lab-number">№1 ЗЕРТХАНАЛЫҚ ЖҰМЫС</div>
+        <h3>Үйкелісті электрлендіру құбылысымен танысу</h3>
+        <p>
+          Денелерді үйкеліс арқылы электрлендіру құбылысын зерттеу.
+        </p>
+        <button onclick="openLab(1)">Зертхананы ашу</button>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-number">№2 ЗЕРТХАНАЛЫҚ ЖҰМЫС</div>
+        <h3>Күштердің бағыты мен электр зарядын анықтау</h3>
+        <p>
+          Электр зарядтарының өзара әсерін және күштердің бағытын зерттеу.
+        </p>
+        <button onclick="openLab(2)">Зертхананы ашу</button>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-number">№3 ЗЕРТХАНАЛЫҚ ЖҰМЫС</div>
+        <h3>Құрылғымен және электроскоптың әрекетімен танысу</h3>
+        <p>
+          Электроскоптың құрылысын және жұмыс істеу принципін зерттеу.
+        </p>
+        <button onclick="openLab(3)">Зертхананы ашу</button>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-number">№4 ЗЕРТХАНАЛЫҚ ЖҰМЫС</div>
+        <h3>Электроскоптағы индукция құбылысымен танысу</h3>
+        <p>
+          Электростатикалық индукция құбылысын зерттеу.
+        </p>
+        <button onclick="openLab(4)">Зертхананы ашу</button>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-number">№5 ЗЕРТХАНАЛЫҚ ЖҰМЫС</div>
+        <h3>Электр тізбегін құрастыруды үйрену</h3>
+        <p>
+          Электр тізбегін құрастыру және оның жұмысын зерттеу.
+        </p>
+        <button onclick="openLab(5)">Зертхананы ашу</button>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-number">№6 ЗЕРТХАНАЛЫҚ ЖҰМЫС</div>
+        <h3>Өткізгіштер мен диэлектриктермен танысу</h3>
+        <p>
+          Әртүрлі материалдардың электр тогын өткізу қасиетін зерттеу.
+        </p>
+        <button onclick="openLab(6)">Зертхананы ашу</button>
+      </div>
+
+    </div>
+
+    <div class="info">
+      <h2>Виртуалды зертхана туралы</h2>
+      <p>
+        Бұл сайт электр және магнетизм тақырыбындағы зертханалық жұмыстарды
+        виртуалды түрде орындауға арналған.
+      </p>
+      <br>
+      <p>
+        Әр зертханалық жұмыста теория, құрал-жабдықтар, тәжірибе барысы,
+        виртуалды тәжірибе, нәтижелер және қорытынды беріледі.
+      </p>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>© 2026 Виртуалды физика зертханасы</p>
+  </footer>
+
+  <script>
+    function openLab(number) {
+      alert(
+        "№" + number +
+        " зертханалық жұмысы әзірлену үстінде."
+      );
+    }
+  </script>
+
 </body>
 </html>
