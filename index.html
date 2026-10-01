@@ -3,390 +3,406 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>№1 зертханалық жұмыс | Виртуалды физика зертханасы</title>
+<title>№1 Виртуалды физика зертханасы</title>
 
 <style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+*{
+  box-sizing:border-box;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background: #eef3f8;
-    color: #172033;
-    line-height: 1.6;
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#eef3f8;
+  color:#17212b;
 }
 
-header {
-    background: linear-gradient(135deg, #111827, #2563eb);
-    color: white;
-    padding: 45px 20px;
+header{
+  background:#123b5d;
+  color:white;
+  padding:22px;
+  text-align:center;
 }
 
-.header-content {
-    max-width: 1150px;
-    margin: auto;
+header h1{
+  margin:0 0 8px;
+  font-size:26px;
 }
 
-.back {
-    color: white;
-    text-decoration: none;
-    opacity: .85;
+header p{
+  margin:0;
+  opacity:.9;
 }
 
-header h1 {
-    font-size: 34px;
-    margin-top: 25px;
+.container{
+  width:94%;
+  max-width:1200px;
+  margin:25px auto;
 }
 
-header p {
-    margin-top: 8px;
-    opacity: .9;
+.card{
+  background:white;
+  border-radius:18px;
+  padding:22px;
+  margin-bottom:22px;
+  box-shadow:0 5px 20px rgba(0,0,0,.08);
 }
 
-.container {
-    max-width: 1150px;
-    margin: 35px auto;
-    padding: 0 20px;
+h2{
+  color:#123b5d;
+  margin-top:0;
 }
 
-.card {
-    background: white;
-    border-radius: 18px;
-    padding: 28px;
-    margin-bottom: 25px;
-    box-shadow: 0 8px 25px rgba(0,0,0,.07);
+.goal{
+  background:#e7f3ff;
+  border-left:5px solid #1976d2;
 }
 
-.card h2 {
-    margin-bottom: 18px;
-    color: #1d4ed8;
+.equipment{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:15px;
 }
 
-.goal {
-    background: #eff6ff;
-    border-left: 5px solid #2563eb;
+.eq{
+  background:#f7f9fb;
+  border:1px solid #dce5ed;
+  border-radius:14px;
+  padding:18px;
+  text-align:center;
 }
 
-.equipment {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-    gap: 15px;
+.eq .icon{
+  font-size:42px;
+  margin-bottom:10px;
 }
 
-.tool {
-    border: 1px solid #dbe3ee;
-    border-radius: 14px;
-    padding: 18px;
-    cursor: pointer;
-    transition: .2s;
+.steps{
+  counter-reset:step;
 }
 
-.tool:hover {
-    transform: translateY(-3px);
-    border-color: #2563eb;
-    background: #f8fbff;
+.step{
+  position:relative;
+  padding:14px 15px 14px 55px;
+  margin:10px 0;
+  background:#f6f8fa;
+  border-radius:12px;
 }
 
-.tool-icon {
-    font-size: 42px;
-    margin-bottom: 8px;
+.step:before{
+  counter-increment:step;
+  content:counter(step);
+  position:absolute;
+  left:15px;
+  top:11px;
+  width:30px;
+  height:30px;
+  background:#1976d2;
+  color:white;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
 }
 
-.tool strong {
-    display: block;
-    margin-bottom: 5px;
+/* SIMULATION */
+
+.simulation{
+  background:#dcecf8;
+  border-radius:18px;
+  padding:20px;
+  overflow:hidden;
 }
 
-.theory {
-    background: #fafafa;
+.sim-title{
+  text-align:center;
+  margin-bottom:10px;
 }
 
-.steps {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+.sim-help{
+  text-align:center;
+  color:#425466;
+  margin-bottom:15px;
 }
 
-.step {
-    display: flex;
-    gap: 15px;
-    align-items: flex-start;
-    padding: 15px;
-    background: #f8fafc;
-    border-radius: 12px;
+.lab-area{
+  position:relative;
+  width:100%;
+  height:600px;
+  background:
+    linear-gradient(rgba(255,255,255,.7),rgba(255,255,255,.7)),
+    repeating-linear-gradient(
+      0deg,
+      #d9e7ef,
+      #d9e7ef 30px,
+      #d3e2ea 30px,
+      #d3e2ea 31px
+    );
+  border:3px solid #aac2d1;
+  border-radius:16px;
+  overflow:hidden;
 }
 
-.step-number {
-    min-width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    background: #2563eb;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
+/* table */
+.table-surface{
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:100%;
+  height:100px;
+  background:#b98655;
+  border-top:8px solid #93663f;
 }
 
-.lab-area {
-    background: #f8fafc;
-    border-radius: 18px;
-    padding: 25px;
+/* OBJECTS */
+
+.object{
+  position:absolute;
+  cursor:grab;
+  user-select:none;
+  touch-action:none;
+  z-index:10;
 }
 
-.lab-controls {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 20px;
+.object:active{
+  cursor:grabbing;
 }
 
-button {
-    border: none;
-    padding: 11px 17px;
-    border-radius: 10px;
-    background: #2563eb;
-    color: white;
-    cursor: pointer;
-    font-size: 15px;
+.pvc{
+  width:32px;
+  height:180px;
+  background:linear-gradient(90deg,#f3f3f3,#ffffff,#d7d7d7);
+  border:2px solid #777;
+  border-radius:15px;
+  transform:rotate(-12deg);
+  box-shadow:3px 5px 8px rgba(0,0,0,.25);
 }
 
-button:hover {
-    background: #1d4ed8;
+.pvc-label{
+  position:absolute;
+  width:150px;
+  text-align:center;
+  font-weight:bold;
+  color:#123b5d;
 }
 
-button.secondary {
-    background: #64748b;
+.cloth{
+  width:145px;
+  height:90px;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      #b7b7b7,
+      #b7b7b7 8px,
+      #d8d8d8 8px,
+      #d8d8d8 16px
+    );
+  border-radius:12px;
+  border:2px solid #888;
+  box-shadow:3px 5px 8px rgba(0,0,0,.18);
 }
 
-button.success {
-    background: #16a34a;
+.cloth-label{
+  position:absolute;
+  top:95px;
+  width:145px;
+  text-align:center;
+  font-weight:bold;
 }
 
-button.warning {
-    background: #ea580c;
+/* paper */
+
+.paper{
+  position:absolute;
+  width:16px;
+  height:11px;
+  background:#fff;
+  border:1px solid #aaa;
+  transform:rotate(var(--r));
+  box-shadow:1px 2px 2px rgba(0,0,0,.15);
+  transition:.35s;
+  z-index:5;
 }
 
-.simulation {
-    position: relative;
-    min-height: 430px;
-    background:
-        linear-gradient(#e5e7eb 1px, transparent 1px),
-        linear-gradient(90deg, #e5e7eb 1px, transparent 1px);
-    background-size: 25px 25px;
-    border: 2px solid #cbd5e1;
-    border-radius: 18px;
-    overflow: hidden;
+/* electroscope */
+
+.electroscope{
+  position:absolute;
+  width:180px;
+  height:250px;
+  z-index:7;
 }
 
-.table {
-    position: absolute;
-    left: 5%;
-    right: 5%;
-    bottom: 35px;
-    height: 35px;
-    background: #8b5e3c;
-    border-radius: 8px;
+.scope-base{
+  position:absolute;
+  bottom:0;
+  left:10px;
+  width:160px;
+  height:55px;
+  background:#263746;
+  border-radius:15px 15px 8px 8px;
 }
 
-.rod {
-    position: absolute;
-    width: 35px;
-    height: 190px;
-    background: #e8f0f7;
-    border: 3px solid #64748b;
-    border-radius: 18px;
-    cursor: grab;
-    transform: rotate(25deg);
-    user-select: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.scope-body{
+  position:absolute;
+  left:35px;
+  top:50px;
+  width:110px;
+  height:150px;
+  border:4px solid #344b5e;
+  border-radius:50px 50px 20px 20px;
+  background:rgba(255,255,255,.75);
 }
 
-.rod span {
-    writing-mode: vertical-rl;
-    font-weight: bold;
-    color: #334155;
+.scope-rod{
+  position:absolute;
+  left:88px;
+  top:0;
+  width:6px;
+  height:110px;
+  background:#555;
 }
 
-#pvcRod {
-    left: 17%;
-    top: 75px;
+.scope-ball{
+  position:absolute;
+  left:70px;
+  top:-18px;
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:#d8d8d8;
+  border:3px solid #777;
 }
 
-#cloth {
-    position: absolute;
-    width: 110px;
-    height: 80px;
-    left: 34%;
-    top: 95px;
-    background: #b8c4d1;
-    border-radius: 12px;
-    cursor: grab;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
+.leaf{
+  position:absolute;
+  top:75px;
+  width:8px;
+  height:85px;
+  background:#d7a928;
+  border-radius:5px;
+  transform-origin:top center;
+  transition:.5s;
 }
 
-.paper-area {
-    position: absolute;
-    left: 5%;
-    bottom: 80px;
-    width: 220px;
-    height: 120px;
+.leaf.left{
+  left:50px;
+  transform:rotate(0deg);
 }
 
-.paper {
-    position: absolute;
-    width: 12px;
-    height: 5px;
-    background: white;
-    border: 1px solid #94a3b8;
-    cursor: pointer;
+.leaf.right{
+  right:50px;
+  transform:rotate(0deg);
 }
 
-.p1 { left: 20px; top: 20px; }
-.p2 { left: 65px; top: 55px; }
-.p3 { left: 110px; top: 25px; }
-.p4 { left: 160px; top: 70px; }
-.p5 { left: 190px; top: 35px; }
+/* second rod */
 
-.electroscope {
-    position: absolute;
-    right: 15%;
-    bottom: 70px;
-    width: 150px;
-    height: 250px;
+.acrylic{
+  width:30px;
+  height:175px;
+  background:linear-gradient(90deg,#ffd6d6,#ffffff,#ffd6d6);
+  border:2px solid #d79a9a;
+  border-radius:15px;
+  transform:rotate(10deg);
+  box-shadow:3px 5px 8px rgba(0,0,0,.22);
 }
 
-.scope-top {
-    position: absolute;
-    top: 0;
-    left: 57px;
-    width: 36px;
-    height: 55px;
-    background: #94a3b8;
-    border-radius: 8px;
+/* controls */
+
+.instructions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:15px;
 }
 
-.scope-rod {
-    position: absolute;
-    top: 45px;
-    left: 72px;
-    width: 7px;
-    height: 130px;
-    background: #475569;
+.info{
+  flex:1;
+  min-width:220px;
+  background:white;
+  padding:14px;
+  border-radius:12px;
+  border-left:5px solid #1976d2;
 }
 
-.scope-box {
-    position: absolute;
-    bottom: 0;
-    left: 10px;
-    width: 130px;
-    height: 100px;
-    border: 4px solid #64748b;
-    border-radius: 12px;
-    background: rgba(255,255,255,.75);
+.status{
+  margin-top:15px;
+  background:#102a43;
+  color:white;
+  padding:15px;
+  border-radius:12px;
+  min-height:50px;
 }
 
-.leaf {
-    position: absolute;
-    top: 57px;
-    width: 8px;
-    height: 65px;
-    background: #eab308;
-    border-radius: 5px;
-    transform-origin: top center;
-    transition: .5s;
+.result-table{
+  width:100%;
+  border-collapse:collapse;
 }
 
-.left-leaf {
-    left: 54px;
-    transform: rotate(0deg);
+.result-table th,
+.result-table td{
+  border:1px solid #ccd6df;
+  padding:12px;
+  text-align:left;
 }
 
-.right-leaf {
-    left: 80px;
-    transform: rotate(0deg);
+.result-table th{
+  background:#e8f1f8;
 }
 
-.charge {
-    position: absolute;
-    color: #dc2626;
-    font-weight: bold;
-    opacity: 0;
-    transition: .3s;
+button{
+  border:0;
+  border-radius:10px;
+  padding:12px 18px;
+  cursor:pointer;
+  background:#1976d2;
+  color:white;
+  font-size:15px;
+  margin-top:10px;
 }
 
-.q1 { left: 53%; top: 55px; }
-.q2 { left: 58%; top: 95px; }
-.q3 { left: 50%; top: 140px; }
-
-.status {
-    margin-top: 18px;
-    padding: 15px;
-    border-radius: 12px;
-    background: #e0f2fe;
-    color: #075985;
-    font-weight: bold;
+button:hover{
+  background:#125ca4;
 }
 
-.results-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
+.reset{
+  background:#c62828;
 }
 
-.results-table th,
-.results-table td {
-    border: 1px solid #cbd5e1;
-    padding: 12px;
-    text-align: left;
+.reset:hover{
+  background:#982020;
 }
 
-.results-table th {
-    background: #eff6ff;
+.charge{
+  position:absolute;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#1769aa;
+  pointer-events:none;
+  z-index:20;
+  animation:chargeMove 1s infinite alternate;
 }
 
-.conclusion {
-    background: #ecfdf5;
-    border-left: 5px solid #16a34a;
+@keyframes chargeMove{
+  from{transform:scale(.7)}
+  to{transform:scale(1.3)}
 }
 
-footer {
-    text-align: center;
-    background: #111827;
-    color: white;
-    padding: 25px;
-    margin-top: 50px;
+.attract{
+  animation:attract .7s infinite alternate;
 }
 
-@media(max-width:700px) {
-    header h1 {
-        font-size: 25px;
-    }
+@keyframes attract{
+  from{transform:translate(0,0)}
+  to{transform:translate(4px,-4px)}
+}
 
-    .simulation {
-        min-height: 550px;
-    }
-
-    .electroscope {
-        right: 7%;
-    }
-
-    #pvcRod {
-        left: 8%;
-    }
-
-    #cloth {
-        left: 35%;
-    }
+@media(max-width:700px){
+  .lab-area{
+    height:700px;
+  }
 }
 </style>
 </head>
@@ -394,614 +410,642 @@ footer {
 <body>
 
 <header>
-    <div class="header-content">
-        <a class="back" href="index.html">← Басты бетке қайту</a>
-
-        <h1>№1 Үйкелісті электрлендіру құбылысымен танысу</h1>
-
-        <p>
-            Виртуалды физика зертханасы
-        </p>
-    </div>
+  <h1>№1 Үйкелісті электрлендіру құбылысымен танысу</h1>
+  <p>Виртуалды физика зертханасы</p>
 </header>
 
-<main class="container">
+<div class="container">
+
+<section class="card goal">
+<h2>Зертханалық жұмыстың мақсаты</h2>
+<p>
+Үйкеліс арқылы электрлену құбылысын зерттеу,
+зарядталған денелердің қасиеттерін бақылау және
+электр зарядының берілуін тәжірибе арқылы түсіну.
+</p>
+</section>
+
+<section class="card">
+<h2>Қажетті құралдар</h2>
+
+<div class="equipment">
+
+<div class="eq">
+<div class="icon">⚪</div>
+<b>Жұп үйкеліс шыбықтары</b>
+<p>Денелерді үйкеп электрлендіру үшін.</p>
+</div>
+
+<div class="eq">
+<div class="icon">⚡</div>
+<b>Электроскоп S</b>
+<p>Дененің зарядталғанын бақылау үшін.</p>
+</div>
 
-    <!-- МАҚСАТЫ -->
+<div class="eq">
+<div class="icon">▯</div>
+<b>ПВХ өзегі бар шыбық</b>
+<p>Үйкеліс арқылы заряд алу үшін.</p>
+</div>
 
-    <section class="card goal">
-        <h2>🎯 Мақсаты</h2>
+<div class="eq">
+<div class="icon">📄</div>
+<b>Қағаз жолақтары</b>
+<p>Зарядталған шыбықтың тарту әсерін бақылау үшін.</p>
+</div>
 
-        <p>
-            Үйкеліс арқылы денелердің электрлену құбылысын зерттеу,
-            электрленген денелердің қасиеттерін бақылау және олардың
-            басқа денелерге әсерін анықтау.
-        </p>
-    </section>
+<div class="eq">
+<div class="icon">🧶</div>
+<b>Мата немесе жүн</b>
+<p>Шыбықты үйкеу үшін.</p>
+</div>
 
+</div>
+</section>
 
-    <!-- ҚҰРАЛДАР -->
+<section class="card">
+<h2>Теориялық мәлімет</h2>
 
-    <section class="card">
+<p>
+Денелерді бір-біріне үйкеген кезде электрондар бір денеден
+екінші денеге ауыса алады. Нәтижесінде денелер электр зарядына ие болады.
+</p>
 
-        <h2>🔬 Құрал-жабдықтар</h2>
+<p>
+Зарядталған дене жеңіл денелерді өзіне тарта алады.
+Электроскоптың жапырақшаларының ашылуы денеде электр заряды бар екенін көрсетеді.
+</p>
+</section>
 
-        <div class="equipment">
+<section class="card">
+<h2>Зертханалық жұмыстың орындалу реті</h2>
 
-            <div class="tool" onclick="showTool('Жұп үйкеліс шыбықтары')">
-                <div class="tool-icon">📏</div>
-                <strong>Жұп үйкеліс шыбықтары</strong>
-                <small>Үйкеліс арқылы электрлендіру үшін</small>
-            </div>
+<div class="steps">
 
-            <div class="tool" onclick="showTool('Электроскоп S')">
-                <div class="tool-icon">⚡</div>
-                <strong>Электроскоп S</strong>
-                <small>Электрленуді анықтау үшін</small>
-            </div>
+<div class="step">
+ПВХ өзегі бар шыбықты қағаз жолақтарымен жақсылап үйкеңіз.
+</div>
 
-            <div class="tool" onclick="showTool('ПВХ өзегі бар шыбық')">
-                <div class="tool-icon">🪄</div>
-                <strong>ПВХ өзегі бар шыбық</strong>
-                <small>Үйкеліс арқылы электрленеді</small>
-            </div>
+<div class="step">
+Үйкелген шыбықты қағаз қиындыларына жақындатып,
+олардың қозғалысын бақылаңыз.
+</div>
 
-            <div class="tool" onclick="showTool('Қағаз жолақтары')">
-                <div class="tool-icon">📄</div>
-                <strong>Қағаз жолақтары</strong>
-                <small>ПВХ шыбықты үйкеу үшін</small>
-            </div>
+<div class="step">
+Шыбықты электроскоптың жоғарғы бөлігіне жақындатыңыз.
+</div>
 
-            <div class="tool" onclick="showTool('Мата немесе жүн')">
-                <div class="tool-icon">🧶</div>
-                <strong>Мата немесе жүн</strong>
-                <small>Үйкеліс үшін</small>
-            </div>
+<div class="step">
+Электроскоп жапырақшаларының ашылуын бақылаңыз.
+</div>
 
-        </div>
+<div class="step">
+Тәжірибені бірнеше рет қайталаңыз.
+</div>
 
-        <div id="toolInfo" class="status" style="display:none;"></div>
+<div class="step">
+Шыбықты қайта үйкеп, оны электроскопқа тигізіңіз.
+Зарядтың берілуін бақылаңыз.
+</div>
 
-    </section>
+<div class="step">
+Екі шыбықты да үйкеліс арқылы электрлендіріп,
+оларды бір-біріне жақындатыңыз.
+</div>
 
+<div class="step">
+Бақылау нәтижелерін жазып, қорытынды жасаңыз.
+</div>
 
-    <!-- ТЕОРИЯ -->
-
-    <section class="card theory">
+</div>
+</section>
 
-        <h2>📚 Қысқаша теориялық түсінік</h2>
-
-        <p>
-            Кейбір денелерді бір-біріне үйкеген кезде олар электрленіп,
-            электр зарядын алады. Бұл құбылыс
-            <strong>үйкеліс арқылы электрлену</strong> деп аталады.
-        </p>
-
-        <br>
-
-        <p>
-            Үйкеліс кезінде электрондардың бір денеден екінші денеге
-            ауысуы нәтижесінде денелердің зарядтары өзгереді.
-            Бір дене теріс, екіншісі оң зарядталуы мүмкін.
-        </p>
 
-        <br>
+<!-- REAL SIMULATION -->
 
-        <p>
-            Электрленген денелер қоршаған жеңіл денелерге әсер етеді.
-            Мысалы, электрленген шыбықты қағаз қиындыларына
-            жақындатқанда, қағаздар шыбыққа тартылады.
-        </p>
+<section class="card">
 
-        <br>
+<h2 class="sim-title">🔬 Қолмен орындалатын виртуалды тәжірибе</h2>
 
-        <p>
-            Дененің электрленгенін электроскоп арқылы да анықтауға болады.
-            Электроскоптың жапырақшалары заряд әсерінен бір-бірінен ажырайды.
-        </p>
+<p class="sim-help">
+Құралдарды тышқанмен ұстап, өзіңіз жылжытыңыз.
+Тәжірибені батырма емес, өз әрекетіңіз арқылы орындаңыз.
+</p>
 
-    </section>
+<div class="simulation">
 
+<div class="lab-area" id="labArea">
 
-    <!-- ЖҰМЫС БАРЫСЫ -->
+<div class="table-surface"></div>
 
-    <section class="card">
-
-        <h2>📝 Жұмыстың орындалу реті</h2>
-
-        <div class="steps">
-
-            <div class="step">
-                <div class="step-number">1</div>
-                <p>
-                    ПВХ өзегі бар шыбықты қағаз жолақтарымен жақсылап үйкейміз.
-                </p>
-            </div>
-
-            <div class="step">
-                <div class="step-number">2</div>
-                <p>
-                    Үйкелген шыбықты қағаз қиындыларына жақындатамыз
-                    және олардың шыбыққа тартылуын бақылаймыз.
-                </p>
-            </div>
-
-            <div class="step">
-                <div class="step-number">3</div>
-                <p>
-                    Шыбықты электроскоптың үстіңгі бөлігіне жақындатамыз.
-                    Электроскоп жапырақшаларының қозғалысын бақылаймыз.
-                </p>
-            </div>
-
-            <div class="step">
-                <div class="step-number">4</div>
-                <p>
-                    Электроскоптың жапырақшалары ажырағанын байқаймыз.
-                    Бұл шыбықтың электрленгенін көрсетеді.
-                </p>
-            </div>
-
-            <div class="step">
-                <div class="step-number">5</div>
-                <p>
-                    Тәжірибені бірнеше рет қайталаймыз және әр тәжірибеде
-                    электроскоптың өзгерісін бақылаймыз.
-                </p>
-            </div>
+<!-- CLOTH -->
 
-            <div class="step">
-                <div class="step-number">6</div>
-                <p>
-                    Шыбықты қайтадан үйкеп, оны электроскопқа тигізіп көреміз.
-                    Электр зарядының электроскопқа берілетінін бақылаймыз.
-                </p>
-            </div>
+<div
+class="object cloth"
+id="cloth"
+style="left:70px;top:440px;"
+data-name="Мата немесе жүн">
+</div>
 
-            <div class="step">
-                <div class="step-number">7</div>
-                <p>
-                    Екі шыбықты да үйкеліс арқылы электрлендіріп,
-                    оларды бір-біріне жақындатамыз.
-                    Шыбықтардың өзара әсерлесуін бақылаймыз.
-                </p>
-            </div>
+<div class="cloth-label" style="left:70px;top:535px;">
+Мата / жүн
+</div>
 
-            <div class="step">
-                <div class="step-number">8</div>
-                <p>
-                    Электрленген денелердің басқа денелерге әсер ететінін
-                    және электр зарядтарының денелер арасында берілуі
-                    мүмкін екенін анықтаймыз.
-                </p>
-            </div>
 
-        </div>
+<!-- PVC ROD -->
 
-    </section>
+<div
+class="object pvc"
+id="pvc"
+style="left:250px;top:380px;"
+data-name="ПВХ шыбығы">
+</div>
 
 
-    <!-- ВИРТУАЛДЫ ТӘЖІРИБЕ -->
+<!-- ELECTROSCOPE -->
 
-    <section class="card">
+<div class="electroscope" id="electroscope"
+style="left:620px;top:300px;">
 
-        <h2>🧪 Виртуалды тәжірибе</h2>
+<div class="scope-ball"></div>
+<div class="scope-rod"></div>
 
-        <p style="margin-bottom:20px;">
-            Құралдарды тышқанмен басып, тәжірибені орындаңыз.
-            Алдымен ПВХ шыбықты қағаз жолақтарымен үйкеңіз.
-        </p>
+<div class="scope-body">
+<div class="leaf left" id="leafLeft"></div>
+<div class="leaf right" id="leafRight"></div>
+</div>
 
-        <div class="lab-area">
+<div class="scope-base"></div>
 
-            <div class="lab-controls">
+</div>
 
-                <button onclick="rubRod()">
-                    🌀 Шыбықты үйкеу
-                </button>
+<div style="
+position:absolute;
+left:630px;
+top:555px;
+font-weight:bold;
+">
+Электроскоп S
+</div>
 
-                <button onclick="bringToPaper()">
-                    📄 Қағазға жақындату
-                </button>
 
-                <button onclick="bringToScope()">
-                    ⚡ Электроскопқа жақындату
-                </button>
+<!-- PAPER PIECES -->
 
-                <button onclick="touchScope()" class="warning">
-                    ⚡ Электроскопқа тигізу
-                </button>
+<div class="paper" style="left:470px;top:470px;--r:12deg;"></div>
+<div class="paper" style="left:510px;top:450px;--r:-10deg;"></div>
+<div class="paper" style="left:550px;top:480px;--r:20deg;"></div>
+<div class="paper" style="left:580px;top:450px;--r:-20deg;"></div>
+<div class="paper" style="left:440px;top:500px;--r:8deg;"></div>
+<div class="paper" style="left:520px;top:510px;--r:-8deg;"></div>
+<div class="paper" style="left:600px;top:500px;--r:15deg;"></div>
 
-                <button onclick="moveAway()" class="secondary">
-                    ↩️ Алыстату
-                </button>
+<!-- SECOND ROD -->
 
-                <button onclick="resetLab()" class="success">
-                    🔄 Қайта бастау
-                </button>
+<div
+class="object acrylic"
+id="acrylic"
+style="left:850px;top:380px;display:none;"
+data-name="Екінші шыбық">
+</div>
 
-            </div>
 
+</div>
 
-            <div class="simulation">
+<div class="instructions">
 
-                <div id="pvcRod" class="rod">
-                    <span>ПВХ</span>
-                </div>
+<div class="info">
+<b>1️⃣ Үйкеу</b><br>
+ПВХ шыбығын ұстап, матаға апарыңыз.
+Шыбықты матаның үстімен бірнеше рет жүргізіңіз.
+</div>
 
-                <div id="cloth">
-                    Мата / жүн
-                </div>
+<div class="info">
+<b>2️⃣ Қағаз</b><br>
+Зарядталған шыбықты қағаздарға жақындатыңыз.
+</div>
 
+<div class="info">
+<b>3️⃣ Электроскоп</b><br>
+Шыбықты электроскоптың шаршысына жақындатыңыз.
+</div>
 
-                <div class="paper-area">
+<div class="info">
+<b>4️⃣ Тигізу</b><br>
+Шыбықты электроскоптың шаршысына тигізіп көріңіз.
+</div>
 
-                    <div class="paper p1"></div>
-                    <div class="paper p2"></div>
-                    <div class="paper p3"></div>
-                    <div class="paper p4"></div>
-                    <div class="paper p5"></div>
+</div>
 
-                </div>
+<div class="status" id="status">
+🔵 Тәжірибені бастау үшін ПВХ шыбығын матаға апарып үйкеңіз.
+</div>
 
+<button class="reset" onclick="resetLab()">
+↻ Тәжірибені қайта бастау
+</button>
 
-                <div class="electroscope">
+</div>
+</section>
 
-                    <div class="scope-top"></div>
 
-                    <div class="scope-rod"></div>
+<section class="card">
 
-                    <div class="scope-box">
+<h2>Нәтижелер</h2>
 
-                        <div id="leftLeaf"
-                             class="leaf left-leaf"></div>
+<table class="result-table">
 
-                        <div id="rightLeaf"
-                             class="leaf right-leaf"></div>
+<tr>
+<th>Тәжірибе</th>
+<th>Бақылау</th>
+<th>Нәтиже</th>
+</tr>
 
-                    </div>
+<tr>
+<td>Шыбықты үйкеу</td>
+<td id="r1">Орындалмады</td>
+<td>Шыбық электрленеді</td>
+</tr>
 
-                </div>
+<tr>
+<td>Қағазға жақындату</td>
+<td id="r2">Орындалмады</td>
+<td>Қағаз тартылуы байқалады</td>
+</tr>
 
+<tr>
+<td>Электроскопқа жақындату</td>
+<td id="r3">Орындалмады</td>
+<td>Жапырақшалар ашылады</td>
+</tr>
 
-                <div id="charge1" class="charge q1">−</div>
-                <div id="charge2" class="charge q2">−</div>
-                <div id="charge3" class="charge q3">−</div>
+<tr>
+<td>Электроскопқа тигізу</td>
+<td id="r4">Орындалмады</td>
+<td>Заряд электроскопқа беріледі</td>
+</tr>
 
+</table>
 
-                <div class="table"></div>
+</section>
 
-            </div>
 
+<section class="card">
 
-            <div id="status" class="status">
-                Тәжірибе басталмады.
-            </div>
+<h2>Қорытынды</h2>
 
-        </div>
+<p id="conclusion">
+Тәжірибені орындағаннан кейін қорытынды осы жерде көрсетіледі.
+</p>
 
-    </section>
+</section>
 
-
-    <!-- НӘТИЖЕ -->
-
-    <section class="card">
-
-        <h2>📊 Бақылау нәтижелері</h2>
-
-        <table class="results-table">
-
-            <thead>
-                <tr>
-                    <th>№</th>
-                    <th>Әрекет</th>
-                    <th>Бақылау нәтижесі</th>
-                </tr>
-            </thead>
-
-            <tbody id="resultBody">
-
-                <tr>
-                    <td>1</td>
-                    <td>ПВХ шыбықты үйкеу</td>
-                    <td>Орындалғанын күтіңіз</td>
-                </tr>
-
-                <tr>
-                    <td>2</td>
-                    <td>Қағазға жақындату</td>
-                    <td>Орындалғанын күтіңіз</td>
-                </tr>
-
-                <tr>
-                    <td>3</td>
-                    <td>Электроскопқа жақындату</td>
-                    <td>Орындалғанын күтіңіз</td>
-                </tr>
-
-                <tr>
-                    <td>4</td>
-                    <td>Электроскопқа тигізу</td>
-                    <td>Орындалғанын күтіңіз</td>
-                </tr>
-
-            </tbody>
-
-        </table>
-
-    </section>
-
-
-    <!-- ҚОРЫТЫНДЫ -->
-
-    <section class="card conclusion">
-
-        <h2>✅ Қорытынды және нәтиже</h2>
-
-        <p>
-            Зерттеу барысында үйкеліс арқылы денелердің электрленетіні
-            тәжірибе жүзінде анықталды.
-        </p>
-
-        <br>
-
-        <p>
-            Үйкелген ПВХ шыбық қағаз қиындыларын өзіне тартты және
-            электроскопқа әсер етіп, оның жапырақшаларының ажырауына
-            себеп болды.
-        </p>
-
-        <br>
-
-        <p>
-            Сонымен қатар электр зарядының бір денеден екінші денеге
-            берілуі байқалды.
-        </p>
-
-        <br>
-
-        <strong>
-            Нәтижесінде: үйкеліс кезінде денелер электр зарядын алады,
-            ал электрленген денелер басқа денелермен электрлік әсерлеседі.
-        </strong>
-
-    </section>
-
-</main>
-
-
-<footer>
-    Виртуалды физика зертханасы © 2026
-</footer>
+</div>
 
 
 <script>
 
-let rubbed = false;
-let paperAttracted = false;
-let scopeActivated = false;
-let scopeTouched = false;
+/* =========================
+   VARIABLES
+========================= */
 
-const status = document.getElementById("status");
+const pvc = document.getElementById("pvc");
+const cloth = document.getElementById("cloth");
+const electroscope = document.getElementById("electroscope");
+const labArea = document.getElementById("labArea");
 
-const leftLeaf = document.getElementById("leftLeaf");
-const rightLeaf = document.getElementById("rightLeaf");
+const leafLeft = document.getElementById("leafLeft");
+const leafRight = document.getElementById("leafRight");
 
-const charges = [
-    document.getElementById("charge1"),
-    document.getElementById("charge2"),
-    document.getElementById("charge3")
-];
+let dragged = null;
+let offsetX = 0;
+let offsetY = 0;
 
-function setStatus(text) {
-    status.textContent = text;
+let rubbing = false;
+let charged = false;
+let nearPaperDone = false;
+let nearScopeDone = false;
+let touchedScope = false;
+
+let rubCount = 0;
+
+
+/* =========================
+   DRAG SYSTEM
+========================= */
+
+document.querySelectorAll(".object").forEach(obj => {
+
+  obj.addEventListener("pointerdown", startDrag);
+
+});
+
+function startDrag(e){
+
+  dragged = e.currentTarget;
+
+  const rect = dragged.getBoundingClientRect();
+
+  offsetX = e.clientX - rect.left;
+  offsetY = e.clientY - rect.top;
+
+  dragged.setPointerCapture(e.pointerId);
+
+  dragged.addEventListener("pointermove", dragObject);
+  dragged.addEventListener("pointerup", stopDrag);
+
 }
 
-function showTool(name) {
 
-    const info = document.getElementById("toolInfo");
+function dragObject(e){
 
-    info.style.display = "block";
+  if(!dragged) return;
 
-    info.textContent =
-        "Құрал: " + name;
+  const area = labArea.getBoundingClientRect();
+
+  let x = e.clientX - area.left - offsetX;
+  let y = e.clientY - area.top - offsetY;
+
+  x = Math.max(0,Math.min(x,area.width-dragged.offsetWidth));
+  y = Math.max(0,Math.min(y,area.height-dragged.offsetHeight));
+
+  dragged.style.left = x + "px";
+  dragged.style.top = y + "px";
+
+  checkPhysics();
 
 }
 
 
-function rubRod() {
+function stopDrag(){
 
-    rubbed = true;
+  if(!dragged) return;
 
-    charges.forEach(charge => {
-        charge.style.opacity = "1";
-    });
+  dragged.removeEventListener("pointermove",dragObject);
+  dragged.removeEventListener("pointerup",stopDrag);
 
-    setStatus(
-        "ПВХ шыбық қағаз жолақтарымен үйкелді. Шыбық электрленді."
-    );
+  dragged = null;
 
-    updateResult(
-        1,
-        "ПВХ шыбықты үйкеу",
-        "Шыбық электрленді"
-    );
 }
 
 
-function bringToPaper() {
+/* =========================
+   DISTANCE
+========================= */
 
-    if (!rubbed) {
+function center(el){
 
-        setStatus(
-            "Алдымен ПВХ шыбықты қағаз жолақтарымен үйкеңіз."
-        );
+  const r = el.getBoundingClientRect();
+  const a = labArea.getBoundingClientRect();
 
-        return;
+  return {
+    x:r.left-a.left+r.width/2,
+    y:r.top-a.top+r.height/2
+  };
+
+}
+
+
+function distance(a,b){
+
+  return Math.sqrt(
+    Math.pow(a.x-b.x,2)+
+    Math.pow(a.y-b.y,2)
+  );
+
+}
+
+
+/* =========================
+   PHYSICS
+========================= */
+
+function checkPhysics(){
+
+  const p = center(pvc);
+  const c = center(cloth);
+  const s = center(electroscope);
+
+  const dCloth = distance(p,c);
+  const dScope = distance(p,s);
+
+  /* RUBBING */
+
+  if(dCloth < 120){
+
+    rubbing = true;
+
+    rubCount++;
+
+    if(rubCount > 15){
+
+      charged = true;
+
+      addChargeEffect();
+
+      document.getElementById("status").innerHTML =
+      "⚡ ПВХ шыбығы матаға үйкелді. Шыбық электрленді. Енді оны қағазға жақындатыңыз.";
+
+      document.getElementById("r1").innerHTML =
+      "✓ Орындалды";
+
     }
 
-    paperAttracted = true;
+  }
+
+
+  /* PAPER ATTRACTION */
+
+  if(charged && dScope > 100){
 
     const papers = document.querySelectorAll(".paper");
 
-    papers.forEach((paper, index) => {
+    let paperCenter = {x:530,y:480};
 
-        paper.style.transform =
-            "translate(" + (25 + index * 3) + "px,-10px)";
+    const dp = distance(p,paperCenter);
 
-        paper.style.transition = ".5s";
+    if(dp < 150){
 
-    });
+      nearPaperDone = true;
 
-    setStatus(
-        "Электрленген шыбыққа қағаз қиындылары тартылды."
-    );
+      papers.forEach((paper,index)=>{
 
-    updateResult(
-        2,
-        "Қағазға жақындату",
-        "Қағаз қиындылары шыбыққа тартылды"
-    );
-}
+        paper.classList.add("attract");
 
+        const rect = paper.getBoundingClientRect();
+        const area = labArea.getBoundingClientRect();
 
-function bringToScope() {
+        let px = rect.left-area.left;
+        let py = rect.top-area.top;
 
-    if (!rubbed) {
+        let dx = p.x-px;
+        let dy = p.y-py;
 
-        setStatus(
-            "Алдымен ПВХ шыбықты электрлеңіз."
-        );
+        let len = Math.sqrt(dx*dx+dy*dy);
 
-        return;
-    }
+        if(len>1){
 
-    scopeActivated = true;
+          px += dx/len*8;
+          py += dy/len*8;
 
-    leftLeaf.style.transform =
-        "rotate(-25deg)";
+          paper.style.left = px+"px";
+          paper.style.top = py+"px";
 
-    rightLeaf.style.transform =
-        "rotate(25deg)";
+        }
 
-    setStatus(
-        "Электрленген шыбық электроскопқа жақындатылды. Жапырақшалар ажырады."
-    );
+      });
 
-    updateResult(
-        3,
-        "Электроскопқа жақындату",
-        "Электроскоп жапырақшалары ажырады"
-    );
-}
+      document.getElementById("r2").innerHTML =
+      "✓ Қағаз тартылды";
 
-
-function touchScope() {
-
-    if (!rubbed) {
-
-        setStatus(
-            "Алдымен ПВХ шыбықты электрлеңіз."
-        );
-
-        return;
-    }
-
-    scopeTouched = true;
-
-    leftLeaf.style.transform =
-        "rotate(-35deg)";
-
-    rightLeaf.style.transform =
-        "rotate(35deg)";
-
-    setStatus(
-        "Шыбық электроскопқа тигізілді. Электр заряды электроскопқа берілді."
-    );
-
-    updateResult(
-        4,
-        "Электроскопқа тигізу",
-        "Электр заряды электроскопқа берілді"
-    );
-}
-
-
-function moveAway() {
-
-    leftLeaf.style.transform =
-        "rotate(0deg)";
-
-    rightLeaf.style.transform =
-        "rotate(0deg)";
-
-    setStatus(
-        "Шыбық электроскоптан алыстатылды. Электроскоптың бастапқы күйі көрсетілді."
-    );
-}
-
-
-function updateResult(number, action, result) {
-
-    const rows =
-        document.querySelectorAll("#resultBody tr");
-
-    const row =
-        rows[number - 1];
-
-    if (row) {
-
-        row.cells[1].textContent =
-            action;
-
-        row.cells[2].textContent =
-            result;
+      document.getElementById("status").innerHTML =
+      "📄 Зарядталған шыбық қағаз қиындыларына әсер етті. Енді электроскопқа жақындатыңыз.";
 
     }
+
+  }
+
+
+  /* ELECTROSCOPE */
+
+  if(charged && dScope < 180 && dScope > 65){
+
+    nearScopeDone = true;
+
+    openLeaves();
+
+    document.getElementById("r3").innerHTML =
+    "✓ Жапырақшалар ашылды";
+
+    document.getElementById("status").innerHTML =
+    "⚡ Электр өрісінің әсерінен электроскоптың жапырақшалары ашылды. Енді шыбықты электроскопқа тигізіңіз.";
+
+  }
+
+
+  /* TOUCH ELECTROSCOPE */
+
+  if(charged && dScope < 70){
+
+    touchedScope = true;
+
+    openLeavesMore();
+
+    document.getElementById("r4").innerHTML =
+    "✓ Заряд берілді";
+
+    document.getElementById("status").innerHTML =
+    "🔋 Шыбық электроскопқа тигізілді. Заряд электроскопқа берілді.";
+
+    document.getElementById("conclusion").innerHTML =
+    "Тәжірибеде ПВХ шыбығын матамен үйкеген кезде оның электрленетіні байқалды. Зарядталған шыбық қағаз қиындыларын тартты және электроскопқа әсер етті. Шыбықты электроскопқа тигізгенде электр заряды берілді.";
+  }
+
 }
 
 
-function resetLab() {
+/* =========================
+   ELECTROSCOPE
+========================= */
 
-    rubbed = false;
-    paperAttracted = false;
-    scopeActivated = false;
-    scopeTouched = false;
+function openLeaves(){
 
-    leftLeaf.style.transform =
-        "rotate(0deg)";
+  leafLeft.style.transform="rotate(-35deg)";
+  leafRight.style.transform="rotate(35deg)";
 
-    rightLeaf.style.transform =
-        "rotate(0deg)";
-
-    charges.forEach(charge => {
-        charge.style.opacity = "0";
-    });
-
-    const papers =
-        document.querySelectorAll(".paper");
-
-    papers.forEach(paper => {
-
-        paper.style.transform =
-            "translate(0,0)";
-
-    });
-
-    const rows =
-        document.querySelectorAll("#resultBody tr");
-
-    rows.forEach((row, index) => {
-
-        row.cells[2].textContent =
-            "Орындалғанын күтіңіз";
-
-    });
-
-    setStatus(
-        "Тәжірибе қайта басталды."
-    );
 }
+
+
+function openLeavesMore(){
+
+  leafLeft.style.transform="rotate(-55deg)";
+  leafRight.style.transform="rotate(55deg)";
+
+}
+
+
+/* =========================
+   CHARGE EFFECT
+========================= */
+
+function addChargeEffect(){
+
+  if(document.querySelector(".charge")) return;
+
+  for(let i=0;i<7;i++){
+
+    const dot=document.createElement("div");
+
+    dot.className="charge";
+
+    dot.style.left=(260+i*4)+"px";
+    dot.style.top=(390+i*15)+"px";
+
+    labArea.appendChild(dot);
+
+  }
+
+}
+
+
+/* =========================
+   RESET
+========================= */
+
+function resetLab(){
+
+  rubbing=false;
+  charged=false;
+  nearPaperDone=false;
+  nearScopeDone=false;
+  touchedScope=false;
+  rubCount=0;
+
+  pvc.style.left="250px";
+  pvc.style.top="380px";
+
+  leafLeft.style.transform="rotate(0deg)";
+  leafRight.style.transform="rotate(0deg)";
+
+  document.querySelectorAll(".paper").forEach((paper,index)=>{
+
+    const positions=[
+      [470,470],
+      [510,450],
+      [550,480],
+      [580,450],
+      [440,500],
+      [520,510],
+      [600,500]
+    ];
+
+    paper.style.left=positions[index][0]+"px";
+    paper.style.top=positions[index][1]+"px";
+
+    paper.classList.remove("attract");
+
+  });
+
+  document.querySelectorAll(".charge").forEach(e=>e.remove());
+
+  document.getElementById("r1").innerHTML="Орындалмады";
+  document.getElementById("r2").innerHTML="Орындалмады";
+  document.getElementById("r3").innerHTML="Орындалмады";
+  document.getElementById("r4").innerHTML="Орындалмады";
+
+  document.getElementById("status").innerHTML=
+  "🔵 Тәжірибені бастау үшін ПВХ шыбығын матаға апарып үйкеңіз.";
+
+  document.getElementById("conclusion").innerHTML=
+  "Тәжірибені орындағаннан кейін қорытынды осы жерде көрсетіледі.";
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+resetLab();
 
 </script>
 
